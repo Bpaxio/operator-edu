@@ -1,4 +1,4 @@
-module bpax.io/ru/cmx/edu/MyApp
+module bpax.io/ru/cmx/edu/MyOperators/myapp
 
 go 1.13
 

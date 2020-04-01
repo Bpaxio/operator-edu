@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"bpax.io/ru/cmx/edu/MyApp/pkg/controller/myapp"
+	"bpax.io/ru/cmx/edu/MyOperators/myapp/pkg/controller/myapp"
 )
 
 func init() {

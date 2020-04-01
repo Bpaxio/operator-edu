@@ -1,7 +1,7 @@
 package apis
 
 import (
-	v1 "bpax.io/ru/cmx/edu/MyApp/pkg/apis/bpaxio/v1"
+	v1 "bpax.io/ru/cmx/edu/MyOperators/myapp/pkg/apis/bpaxio/v1"
 )
 
 func init() {

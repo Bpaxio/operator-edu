@@ -1,7 +1,7 @@
 package myapp
 
 import (
-	bpaxiov1 "bpax.io/ru/cmx/edu/MyApp/pkg/apis/bpaxio/v1"
+	bpaxiov1 "bpax.io/ru/cmx/edu/MyOperators/myapp/pkg/apis/bpaxio/v1"
 	corev1 "k8s.io/api/core/v1"
 	"sigs.k8s.io/controller-runtime/pkg/controller"
 	"sigs.k8s.io/controller-runtime/pkg/handler"

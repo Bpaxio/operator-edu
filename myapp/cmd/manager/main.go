@@ -13,9 +13,9 @@ import (
 	_ "k8s.io/client-go/plugin/pkg/client/auth"
 	"k8s.io/client-go/rest"
 
-	"bpax.io/ru/cmx/edu/MyApp/pkg/apis"
-	"bpax.io/ru/cmx/edu/MyApp/pkg/controller"
-	"bpax.io/ru/cmx/edu/MyApp/version"
+	"bpax.io/ru/cmx/edu/MyOperators/myapp/pkg/apis"
+	"bpax.io/ru/cmx/edu/MyOperators/myapp/pkg/controller"
+	"bpax.io/ru/cmx/edu/MyOperators/myapp/version"
 
 	"github.com/operator-framework/operator-sdk/pkg/k8sutil"
 	kubemetrics "github.com/operator-framework/operator-sdk/pkg/kube-metrics"
