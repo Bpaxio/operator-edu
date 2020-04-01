@@ -76,7 +76,7 @@ func (r *ReconcileMyApp) psqlDeployment(cr *bpaxiov1.MyApp) *appsv1.Deployment {
 						Image: "postgres:9.6.17",
 						Name:  cr.Name + "-psql",
 						Ports: []corev1.ContainerPort{{
-							ContainerPort: 3306,
+							ContainerPort: 5432,
 							Name:          "postgres",
 						}},
 						Env: []corev1.EnvVar{
@@ -85,15 +85,19 @@ func (r *ReconcileMyApp) psqlDeployment(cr *bpaxiov1.MyApp) *appsv1.Deployment {
 								Value: "password",
 							},
 							{
-								Name:  "PSQL_DATABASE",
-								Value: "myapp",
+								Name:  "PG_DATA",
+								Value: "/data/postgres",
 							},
 							{
-								Name:      "PSQL_USER",
+								Name:  "POSTGRES_DB",
+								Value: "example",
+							},
+							{
+								Name:      "POSTGRES_USER",
 								ValueFrom: userSecret,
 							},
 							{
-								Name:      "PSQL_PASSWORD",
+								Name:      "POSTGRES_PASSWORD",
 								ValueFrom: passwordSecret,
 							},
 						},

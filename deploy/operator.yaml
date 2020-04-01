@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: MyApp
+  name: my-app-operator
 spec:
   replicas: 1
   selector:
@@ -12,9 +12,9 @@ spec:
       labels:
         name: MyApp
     spec:
-      serviceAccountName: MyApp
+      serviceAccountName: my-app
       containers:
-        - name: MyApp
+        - name: my-app
           # Replace this with the built image name
           image: bpaxio/operator_myapp:latest
           command:

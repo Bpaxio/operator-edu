@@ -86,7 +86,7 @@ func main() {
 
 	ctx := context.TODO()
 	// Become the leader before proceeding
-	err = leader.Become(ctx, "MyApp-lock")
+	err = leader.Become(ctx, "axax-my-app-lock")
 	if err != nil {
 		log.Error(err, "")
 		os.Exit(1)

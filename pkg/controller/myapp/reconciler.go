@@ -47,26 +47,24 @@ func (r *ReconcileMyApp) Reconcile(request reconcile.Request) (reconcile.Result,
 		// Error reading the object - requeue the request.
 		return reconcile.Result{}, err
 	}
-
-	v := &bpaxiov1.MyApp{}
 	var result *reconcile.Result
 
-	result, err = r.ensureSecret(request, v, r.psqlAuthSecret(v))
+	result, err = r.ensureSecret(request, instance, r.psqlAuthSecret(instance))
 	if result != nil {
 		return *result, err
 	}
 
-	result, err = r.ensureDeployment(request, v, r.psqlDeployment(v))
+	result, err = r.ensureDeployment(request, instance, r.psqlDeployment(instance))
 	if result != nil {
 		return *result, err
 	}
 
-	result, err = r.ensureService(request, v, r.psqlService(v))
+	result, err = r.ensureService(request, instance, r.psqlService(instance))
 	if result != nil {
 		return *result, err
 	}
 
-	psqlRunning := r.isPsqlUp(v)
+	psqlRunning := r.isPsqlUp(instance)
 
 	if !psqlRunning {
 		// If pSQL isn't running yet, requeue the reconcile
