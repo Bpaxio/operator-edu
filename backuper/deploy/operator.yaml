@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backuper
+  name: backuper-operator
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       name: backuper
@@ -12,11 +12,11 @@ spec:
       labels:
         name: backuper
     spec:
-      serviceAccountName: backuper
+      serviceAccountName: backuper-sa
       containers:
         - name: backuper
           # Replace this with the built image name
-          image: REPLACE_IMAGE
+          image: bpaxio/operator_backuper:latest
           command:
           - backuper
           imagePullPolicy: Always

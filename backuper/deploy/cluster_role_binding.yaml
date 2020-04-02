@@ -6,6 +6,6 @@ subjects:
 - kind: ServiceAccount
   name: backuper-sa
 roleRef:
-  kind: Role
-  name: backuper
+  kind: ClusterRole
+  name: cluster-backuper
   apiGroup: rbac.authorization.k8s.io

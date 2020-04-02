@@ -1,0 +1,7 @@
+apiVersion: bpaxio.edu/v1
+kind: Backuper
+metadata:
+  name: example-backuper
+spec:
+  # Add fields here
+  size: 3

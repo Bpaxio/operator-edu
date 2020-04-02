@@ -1,26 +1,19 @@
-kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
 metadata:
+  creationTimestamp: null
   name: backuper
+  namespace: dev
 rules:
 - apiGroups:
   - ""
   resources:
-  - pods
-  - services
-  - services/finalizers
-  - endpoints
-  - persistentvolumeclaims
   - events
   - configmaps
   - secrets
   verbs:
-  - create
-  - delete
   - get
   - list
-  - patch
-  - update
   - watch
 - apiGroups:
   - apps
@@ -30,28 +23,22 @@ rules:
   - replicasets
   - statefulsets
   verbs:
-  - create
-  - delete
   - get
   - list
-  - patch
-  - update
-  - watch
 - apiGroups:
   - monitoring.coreos.com
   resources:
   - servicemonitors
   verbs:
-  - "get"
-  - "create"
+  - get
 - apiGroups:
   - apps
-  resources:
-  - deployments/finalizers
   resourceNames:
   - backuper
+  resources:
+  - deployments/finalizers
   verbs:
-  - "update"
+  - update
 - apiGroups:
   - ""
   resources:
@@ -65,3 +52,14 @@ rules:
   - deployments
   verbs:
   - get
+  - list
+  - watch
+- apiGroups:
+  - bpaxio.edu
+  resources:
+  - '*'
+  - backupers
+  verbs:
+  - get
+  - list
+  - watch
