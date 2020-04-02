@@ -9,18 +9,18 @@ rules:
   resources:
   - events
   - configmaps
-  - secrets
   verbs:
   - get
   - list
   - watch
 - apiGroups:
-  - apps
+  - ""
   resources:
-  - deployments
-  - daemonsets
-  - replicasets
-  - statefulsets
+  - secrets
   verbs:
+  - create
+  - update
+  - delete
   - get
   - list
+  - watch

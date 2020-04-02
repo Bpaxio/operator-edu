@@ -2,6 +2,7 @@ package backuper
 
 import (
 	"context"
+	"strings"
 
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/errors"
@@ -30,8 +31,15 @@ var TARGET_NAMESPACE = "dev-duplication"
 func (r *ReconcileBackuper) Reconcile(request reconcile.Request) (reconcile.Result, error) {
 	reqLogger := log.WithValues("Request.Namespace", request.Namespace, "Request.Name", request.Name)
 	reqLogger.Info("Reconciling Backuper")
-	if request.Namespace == TARGET_NAMESPACE {
-		// terget secrets just should be deleted
+	if request.Namespace == TARGET_NAMESPACE ||
+		request.Namespace == "default" ||
+		request.Namespace == "kube-node-lease" ||
+		request.Namespace == "kube-public" ||
+		request.Namespace == "kube-system" ||
+		strings.Contains(request.Name, "-copy") ||
+		strings.Contains(request.Name, TARGET_NAMESPACE+"-ns-") {
+		reqLogger.Info("Skip reconcile: Secret is special")
+		// secrets of target and default namespaces should be skipped
 		return reconcile.Result{}, nil
 	}
 
@@ -51,12 +59,12 @@ func (r *ReconcileBackuper) Reconcile(request reconcile.Request) (reconcile.Resu
 	}
 
 	// Check if this Secret duplication already exists
-	found, fail := r.checkSecretInCustomNamespace(request, instance)
+	found, fail := r.checkSecretInCustomNamespace(request)
 	if fail != nil {
 		if errors.IsNotFound(fail) {
-			reqLogger.Info("Not Found secret")
+			reqLogger.Info("Not Found secret", "Secret.Namespace", found.Namespace, "Secret.Name", found.Name)
 			// Define a new Secret object
-			return r.ensureSecret(request, instance, found)
+			return r.ensureSecret(request, instance)
 		}
 		// Error reading the object - requeue the request.
 		return reconcile.Result{}, fail

@@ -8,12 +8,21 @@ rules:
 - apiGroups:
   - ""
   resources:
+  - pods
+  - services
+  - services/finalizers
+  - endpoints
+  - persistentvolumeclaims
   - events
   - configmaps
   - secrets
   verbs:
+  - create
+  - delete
   - get
   - list
+  - patch
+  - update
   - watch
 - apiGroups:
   - apps
@@ -23,18 +32,24 @@ rules:
   - replicasets
   - statefulsets
   verbs:
+  - create
+  - delete
   - get
   - list
+  - patch
+  - update
+  - watch
 - apiGroups:
   - monitoring.coreos.com
   resources:
   - servicemonitors
   verbs:
   - get
+  - create
 - apiGroups:
   - apps
   resourceNames:
-  - backuper
+  - MyApp
   resources:
   - deployments/finalizers
   verbs:
@@ -52,14 +67,16 @@ rules:
   - deployments
   verbs:
   - get
-  - list
-  - watch
 - apiGroups:
   - bpaxio.edu
   resources:
   - '*'
-  - backupers
   verbs:
+  - create
+  - delete
   - get
   - list
+  - patch
+  - update
   - watch
+    
